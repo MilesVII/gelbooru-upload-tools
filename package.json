@@ -1,0 +1,15 @@
+{
+	"type": "module",
+	"scripts": {
+		"build": "esbuild src/gelbooru.ts src/twitter.ts src/options.ts --bundle --sourcemap --outdir=dist/js",
+		"watch": "esbuild src/gelbooru.ts src/twitter.ts src/options.ts --bundle --sourcemap --watch --outdir=dist/js"
+	},
+	"devDependencies": {
+		"@types/chrome": "^0.0.254",
+		"esbuild": "0.19.9",
+		"typescript": "^5.3.3"
+	},
+	"dependencies": {
+		"@types/webextension-polyfill": "^0.10.7"
+	}
+}

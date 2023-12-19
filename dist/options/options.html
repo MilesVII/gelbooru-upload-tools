@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<style type="text/css">
+			:root {
+				--color-glb: #0773fb;
+			}
+
+			html, body {
+				height: 100%;
+			}
+			body {
+				background-color: white;
+				color: black;
+				padding: .5em;
+				font-family: "Segoe UI", "SF Pro Text", "Consolas";
+			}
+
+			.list {
+				display: flex;
+				flex-flow: column nowrap;
+				align-items: stretch;
+				justify-content: start;
+				gap: .5em;
+			}
+
+			.row {
+				display: flex;
+				align-items: center;
+				justify-content: start;
+				gap: .5em;
+			}
+
+			input[type="checkbox"] {
+				appearance: none;
+
+				border-radius: .2em;
+				width: 1.2em;
+				height: 1.2em;
+
+				border: 2px solid var(--color-glb);
+				transition: 0.12s all linear;
+				margin-right: 5px;
+			}
+			input[type="checkbox"]:checked {
+				border-width: .56em;
+			}
+			input[type="checkbox"], .row > label {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="list">
+			<div class="row">
+				<input type="checkbox" id="rof" value="rof">
+				<label for="rof">Remove pocket item on fill</label>
+			</div>
+		</div>
+		<script src="../js/options.js"></script>
+	</body>
+</html>
