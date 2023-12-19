@@ -34,7 +34,6 @@ export async function save<T extends StorageKey>(key: T, value: Storage[T]) {
 }
 export async function load<T extends StorageKey>(key: T): Promise<Storage[T]>{
 	const stored = await browser.storage.local.get(key);
-	console.log(stored);
 	if (stored && stored[key])
 		return stored[key] as Storage[T];
 	else
