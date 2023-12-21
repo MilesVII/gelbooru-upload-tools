@@ -15,9 +15,23 @@ const colors = {
 };
 let running = false;
 let halt = false;
-const [setButtonCaption, setButtonColor] = addButton();
+const [setButtonCaption, setButtonColor, showButton] = addButton();
 setButtonCaption(getStateCaption());
 const [setToastCaption, setToastShow] = addToast();
+
+observeUrlChange(() => showButton(window.location.pathname.includes("/media")));
+
+function observeUrlChange(cb: () => void) {
+	let oldHref = document.location.href;
+	cb();
+	const observer = new MutationObserver(() => {
+		if (oldHref !== document.location.href) {
+			oldHref = document.location.href;
+			cb();
+		}
+	});
+	observer.observe(document.body, { childList: true, subtree: true });
+};
 
 function flickerToast(caption: string, time = 5000) {
 	setToastCaption(caption);
@@ -26,13 +40,6 @@ function flickerToast(caption: string, time = 5000) {
 }
 
 function sleep(ms: number){return new Promise(resolve => setTimeout(resolve, ms));}
-
-function nextArticle(article: HTMLElement){
-	const list = Array.from(document.querySelectorAll("section img"));
-	const index = list.findIndex(i => i === article);
-	if (index === list.length - 1) return null;
-	return list[index + 1] as HTMLElement;
-}
 
 function source(article: HTMLElement){
 	let scope = article.parentElement;
@@ -50,7 +57,7 @@ function pic(article: HTMLImageElement){
 	return [`${article.src.split("?")[0]}.${format}:orig`, article.src];
 }
 
-function addButton(): [([captionText, leftpad]: [string, number]) => void, (color: string) => void]{
+function addButton(): [([captionText, leftpad]: [string, number]) => void, (color: string) => void, (show: boolean) => void]{
 	const button = buildElement({
 		style: {
 			backgroundColor: colors.white,
@@ -99,7 +106,8 @@ function addButton(): [([captionText, leftpad]: [string, number]) => void, (colo
 
 	return [
 		updateCaption,
-		(color: string) => button.style.backgroundColor = color
+		color => button.style.backgroundColor = color,
+		show => button.style.display = (show ? "flex" : "none")
 	];
 }
 
