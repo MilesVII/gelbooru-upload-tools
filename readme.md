@@ -22,5 +22,7 @@ Extension package is under `dist/` directory.
 
 [addons.mozilla.org](https://addons.mozilla.org/en-US/firefox/addon/gelbooru-batch-upload-tools/)
 
+**On Firefox browsers, you might need to enable access to `twitter.com`, `gelbooru.com` and `corsproxy.io` in addon settings under "Permissions" tab after installing the addon**
+
 ## License
 Shared under WTFPL license.
